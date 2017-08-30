@@ -1,0 +1,84 @@
+/* Style all the things*/
+
+@font-face {
+  font-family: 'playing card';
+  src: 	url('public/src/style/fonts/Hoyle Playing Cards.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+   		url('public/src/style/fonts/Hoyle Playing Cards.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  font-weight: normal;
+  font-style: normal;
+}
+
+.card-table {
+	display: flex;
+	flex-direction: column;
+}
+
+.card-row {
+	display: flex;
+	flex-direction: row;
+	height: 260px;
+}
+
+.player-controls {
+	display: flex;
+	flex-direction: row;
+
+	button {
+		display: flex;
+	}
+}
+
+.display-points {
+	font: 20px helvetica;
+}
+
+.card {
+	font: 35px 'playing card';
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5px;
+	border: 2px solid #2f2f2f;
+	border-radius: 4px;
+	box-shadow: 4px 3px #ccc;
+	width: 150px;
+	height: 250px;
+
+	&.card-back {
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f3f3f3+50,ededed+51,ffffff+100;White+Gloss+%232 */
+		background: rgb(255,255,255); /* Old browsers */
+		background: -moz-linear-gradient(-45deg, rgba(255,255,255,1) 0%, rgba(243,243,243,1) 50%, rgba(237,237,237,1) 51%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(135deg, rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	}
+}
+
+.red-card {
+	color: red;
+}
+
+.top-left-title {
+	align-self: flex-start;
+	margin-left: 3px;
+}
+
+.face-card-border {
+	background: #efefef;
+	border: 1px solid #2f2f2f;
+	border-radius: 4px;
+	width: 100px;
+	height: 180px;
+}
+
+.face-card-portrait {
+	font: 250px 'playing card';
+	line-height: 155px;
+	padding-left: 5px;
+}
+
+.bottom-right-title {
+	align-self: flex-end;
+	margin: 0px 3px;
+}

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+	"allowJs": true,
+	"experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+    "outDir":"public/dist"
+  },
+  "files": [
+	"public/src/app/app.module.ts",
+    "public/src/app/blackjack.ts",
+	"public/src/app/cards/playingCard.component.ts"
+  ],
+  "exclude": [
+	"node_modules",
+	"**/*.spec.ts"
+  ]
+}
