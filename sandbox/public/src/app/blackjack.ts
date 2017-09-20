@@ -176,8 +176,6 @@ export class Blackjack {
 		}
 		else if ( currPoints[0] === 21 || currPoints[1] === 21) {
 
-			this.openSnackBar('BLACKJACK!');
-
 			if ( this.playerCards.length > 2 ) {
 				this.dealerAI();
 			}
@@ -288,11 +286,21 @@ export class Blackjack {
 				}
 				else if ( playerHighest > dealerHighest ) {
 					this.winnings += this.playerBet * 2
-					this.openSnackBar('You win!');
+					if ( playerHighest === 21 && this.playerCards.length === 2 ) {
+						this.openSnackBar('BLACKJACK!');
+					}
+					else {
+						this.openSnackBar('You win!');
+					}
 				}
 				else {
 					//Lost
-					this.openSnackBar('Doh!');
+					if ( dealerHighest === 21 && this.dealerCards.length === 2 ) {
+						this.openSnackBar('Dealer Blackjack');
+					}
+					else {
+						this.openSnackBar('Doh!');
+					}
 				}
 			}
 		}
