@@ -1,7 +1,7 @@
 declare function require(string): string;
 import * as _ from 'lodash';
 import {Component} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {DeckService} from './cards/deck.service';
 
 @Component({
@@ -19,9 +19,9 @@ import {DeckService} from './cards/deck.service';
 						<playing-card *ngFor='let card of playerCards' [card]="card" ></playing-card>
 					</div>
 					<div class="player-controls">
-						<button md-button (click)="deal()" *ngIf="playerBet === null" href="#">Deal</button>
-						<button md-button (click)="hitPlayer()" *ngIf="playerBet !== null" href="#">Hit</button>
-						<button md-button (click)="stand()" *ngIf="playerBet !== null" href="#">Stand</button>
+						<button mat-button (click)="deal()" *ngIf="playerBet === null" href="#">Deal</button>
+						<button mat-button (click)="hitPlayer()" *ngIf="playerBet !== null" href="#">Hit</button>
+						<button mat-button (click)="stand()" *ngIf="playerBet !== null" href="#">Stand</button>
 					</div>
 				</div>`
 })
@@ -45,7 +45,7 @@ export class Blackjack {
 
 	_snackBar = null;
 
-	constructor ( snackBar: MdSnackBar ) {
+	constructor ( snackBar: MatSnackBar ) {
 
 		this._snackBar = snackBar;
 
@@ -57,7 +57,7 @@ export class Blackjack {
 	    this._snackBar.open(message, '', {
 	      duration: 2000,
 	    });
-	    //this.MdSnackBar.open(message, 'OK', this.snackConfig);
+	    //this.MatSnackBar.open(message, 'OK', this.snackConfig);
 	  }
 
 	scorePoints( currPoints, card ) {
