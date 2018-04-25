@@ -1,7 +1,7 @@
 declare function require(string): string;
 import * as _ from 'lodash';
 import {Component} from '@angular/core';
-import {MatSnackBar} from '@angular/material';
+import {MdSnackBar} from '@angular/material';
 import {DeckService} from './cards/deck.service';
 
 @Component({
@@ -19,9 +19,10 @@ import {DeckService} from './cards/deck.service';
 						<playing-card *ngFor='let card of playerCards' [card]="card" ></playing-card>
 					</div>
 					<div class="player-controls">
-						<button mat-button (click)="deal()" *ngIf="playerBet === null" href="#">Deal</button>
-						<button mat-button (click)="hitPlayer()" *ngIf="playerBet !== null" href="#">Hit</button>
-						<button mat-button (click)="stand()" *ngIf="playerBet !== null" href="#">Stand</button>
+						<button md-button (click)="deal()" *ngIf="pot === null" href="#">Deal</button>
+						<button md-button (click)="hitPlayer()" *ngIf="pot !== null" href="#">Hit</button>
+						<button md-button (click)="playerDoubleDown()" *ngIf="pot !== null" href="#">Double Down</button>
+						<button md-button (click)="stand()" *ngIf="pot !== null" href="#">Stand</button>
 					</div>
 				</div>`
 })
@@ -41,11 +42,11 @@ export class Blackjack {
 	dealerBusted = false;
 	playerBusted = false;
 
-	playerBet = null;
+	pot = null;
 
 	_snackBar = null;
 
-	constructor ( snackBar: MatSnackBar ) {
+	constructor ( snackBar: MdSnackBar ) {
 
 		this._snackBar = snackBar;
 
@@ -57,7 +58,7 @@ export class Blackjack {
 	    this._snackBar.open(message, '', {
 	      duration: 2000,
 	    });
-	    //this.MatSnackBar.open(message, 'OK', this.snackConfig);
+	    //this.MdSnackBar.open(message, 'OK', this.snackConfig);
 	  }
 
 	scorePoints( currPoints, card ) {
@@ -105,6 +106,15 @@ export class Blackjack {
 		return this.gameDeck.dealCard();
 	}
 
+	placeBet( stake ) {
+
+		if ( _.isNil( stake ) ) {
+			stake = 10;
+		}
+		this.pot += stake * 2;
+		this.winnings -= stake;
+	}
+
 	deal() {
 
 		//Make 10$ bet for player reset at zero
@@ -112,8 +122,8 @@ export class Blackjack {
 			this.winnings = 100;
 		}
 
-		this.playerBet = 10;
-		this.winnings -= 10;
+		//Reset bet
+		this.placeBet( null );
 
 		for ( var i = 1; i <= 4; i++ ) {
 
@@ -200,7 +210,17 @@ export class Blackjack {
 
 		this.playerCards.push( currCard );
 
-		this.checkBustBlackjack( this.playerPoints, false );
+		return this.checkBustBlackjack( this.playerPoints, false );
+	}
+
+	playerDoubleDown() {
+
+		//Double down the bet
+		this.placeBet( null );
+
+		if ( !this.hitPlayer() ) {
+			this.stand();
+		}
 	}
 
 	dealerAI() {
@@ -245,7 +265,7 @@ export class Blackjack {
 
 			if ( this.dealerBusted ) {
 				//player wins
-				this.winnings += (this.playerBet * 2);
+				this.winnings += this.pot;
 			}
 			else {
 
@@ -281,11 +301,11 @@ export class Blackjack {
 				//Final score
 				if ( playerHighest === dealerHighest ) {
 					//Push
-					this.winnings += this.playerBet;
+					this.winnings += this.pot / 2;
 					this.openSnackBar('Push');
 				}
 				else if ( playerHighest > dealerHighest ) {
-					this.winnings += this.playerBet * 2
+					this.winnings += this.pot
 					if ( playerHighest === 21 && this.playerCards.length === 2 ) {
 						this.openSnackBar('BLACKJACK!');
 					}
@@ -312,7 +332,7 @@ export class Blackjack {
 		var hoc = this;
 		//Reset
 		setTimeout( () => {
-			hoc.playerBet = null;
+			hoc.pot = null;
 
 			//Discard
 			hoc.gameDeck.discardCards( hoc.playerCards );
