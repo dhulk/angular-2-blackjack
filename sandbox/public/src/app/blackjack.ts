@@ -1,7 +1,7 @@
 declare function require(string): string;
 import * as _ from 'lodash';
 import {Component} from '@angular/core';
-import {MdSnackBar} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {DeckService} from './cards/deck.service';
 
 @Component({
@@ -46,7 +46,7 @@ export class Blackjack {
 
 	_snackBar = null;
 
-	constructor ( snackBar: MdSnackBar ) {
+	constructor ( snackBar: MatSnackBar ) {
 
 		this._snackBar = snackBar;
 
@@ -58,7 +58,7 @@ export class Blackjack {
 	    this._snackBar.open(message, '', {
 	      duration: 2000,
 	    });
-	    //this.MdSnackBar.open(message, 'OK', this.snackConfig);
+	    //this.MatSnackBar.open(message, 'OK', this.snackConfig);
 	  }
 
 	scorePoints( currPoints, card ) {
