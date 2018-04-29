@@ -21,7 +21,7 @@ import {DeckService} from './cards/deck.service';
 					<div class="player-controls">
 						<button md-button (click)="deal()" *ngIf="pot === null" href="#">Deal</button>
 						<button md-button (click)="hitPlayer()" *ngIf="pot !== null" href="#">Hit</button>
-						<button md-button (click)="playerDoubleDown()" *ngIf="pot !== null" href="#">Double Down</button>
+						<button md-button (click)="playerDoubleDown()" *ngIf="pot !== null && playerCards.length === 2" href="#">Double Down</button>
 						<button md-button (click)="stand()" *ngIf="pot !== null" href="#">Stand</button>
 					</div>
 				</div>`
