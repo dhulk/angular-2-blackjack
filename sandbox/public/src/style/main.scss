@@ -2,8 +2,8 @@
 
 @font-face {
   font-family: 'playing card';
-  src: 	url('public/src/style/fonts/Hoyle Playing Cards.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-   		url('public/src/style/fonts/Hoyle Playing Cards.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  src: 	url('./fonts/Hoyle Playing Cards.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+   		url('./fonts/Hoyle Playing Cards.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
   font-weight: normal;
   font-style: normal;
 }
@@ -26,6 +26,7 @@
 
 	button {
 		display: flex;
+		margin: 3px;
 	}
 }
 

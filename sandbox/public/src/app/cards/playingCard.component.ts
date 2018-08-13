@@ -1,10 +1,8 @@
-declare function require(string): string;
 import {Component, Input} from '@angular/core';
 import {DeckService} from './deck.service';
 import {suits} from './suits';
 
 @Component({
-	styles: [require('main')],
 	selector: 	'playing-card',
 				template: `<div class="card" *ngIf="card.faceUp" >
 								<div class="top-left-title">

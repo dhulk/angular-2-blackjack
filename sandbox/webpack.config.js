@@ -1,53 +1,55 @@
 var path = require('path');
 
 module.exports = {
+	mode: "development",
     entry: path.join(__dirname, 'public', 'src', 'app', 'main.ts'),
     output: {
         path: path.join(__dirname, 'public', 'dist'),
         filename: 'vendor.js'
     },
     resolve: {
-        extensions: [ '', '.ts', '.js', '.css', '.scss' ],
-		modules: [path.join(__dirname, "node_modules")],
-        root: path.join(__dirname, 'public', 'src' ),
-        alias: {
-            'main': 'style/main.scss'
-        },
-        entry: {
-            'style': ['main']
-        }
+        extensions: [ '.ts', '.js', '.css', '.scss' ],
+		modules: [path.join(__dirname, "node_modules")]
     },
-    module: {
-        loaders: [
-			{ test: /\.ts$/, loaders: ['babel-loader', 'ts-loader'] },
-            {
-                test: /\.js$/,
-                loader: "babel-loader",
-                query: {
-                    presets: ['es2015']
-                }
+	module: {
+		rules: [
+			{
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                exclude: /node_modules/,
             },
-            { test: /\.css$/, loaders: ['style-loader', 'css-loader'] },
-            //{ test: /\.scss$/, loaders: ['raw-loader', 'style-loader', 'css-loader', 'sass-loader'] },
-			{ test: /\.scss$/, exclude: /node_modules/, loaders: ['raw-loader', 'sass-loader'] },			
-            { test: /\.html$/, exclude: /lib/, loader: 'html-loader'},
-            { test: /\.(png|ttf|otf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loaders: ['file-loader'] },
-            { test: /\.((png|woff(2))?(\?v=[0-9]\.[0-9]\.[0-9]))?$/, loader: 'url-loader?limit=10000&mimetype=application/font-woff' }
-        ]
-    },
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader"
+				}
+			},
+			{
+				test: /\.scss$/,
+				use: [
+						"style-loader", // creates style nodes from JS strings
+						"css-loader", // translates CSS into CommonJS
+						"sass-loader" // compiles Sass to CSS, using Node Sass by default
+					]		
+            },
+			{
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/'
+                    }
+                }]
+            }		
+		],
+	},   
 	devtool:'#inline-source-map',
 	devServer: {
 		port: 3000,
 		stats: {
 		  colors: true
-		}/*,
-		outputPath: '/dist/',
-		contentBase: '/dist/'/,
-		proxy: {
-			'/facts/ws/*':  {
-				target: 'http://localhost:7001',
-				secure: false
-			}
-		}*/
+		}
 	}
 }

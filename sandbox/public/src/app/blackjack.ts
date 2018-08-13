@@ -1,11 +1,9 @@
-declare function require(string): string;
 import * as _ from 'lodash';
 import {Component} from '@angular/core';
 import {MatSnackBar} from '@angular/material';
 import {DeckService} from './cards/deck.service';
 
 @Component({
-	styles: [require('main')],
 	selector: 'blackjack',
 	template: `	<div class="card-table">
 					<span class="display-points">Winnings: {{winnings}}$ (*** HiLo: {{gameDeck.getHiLo()}} ***)</span>
@@ -19,10 +17,10 @@ import {DeckService} from './cards/deck.service';
 						<playing-card *ngFor='let card of playerCards' [card]="card" ></playing-card>
 					</div>
 					<div class="player-controls">
-						<button md-button (click)="deal()" *ngIf="pot === null" href="#">Deal</button>
-						<button md-button (click)="hitPlayer()" *ngIf="pot !== null" href="#">Hit</button>
-						<button md-button (click)="playerDoubleDown()" *ngIf="pot !== null && playerCards.length === 2" href="#">Double Down</button>
-						<button md-button (click)="stand()" *ngIf="pot !== null" href="#">Stand</button>
+						<button mat-flat-button (click)="deal()" *ngIf="pot === null" href="#">Deal</button>
+						<button mat-flat-button (click)="hitPlayer()" *ngIf="pot !== null" href="#">Hit</button>
+						<button mat-flat-button (click)="playerDoubleDown()" *ngIf="pot !== null && playerCards.length === 2" href="#">Double Down</button>
+						<button mat-flat-button (click)="stand()" *ngIf="pot !== null" href="#">Stand</button>
 					</div>
 				</div>`
 })
@@ -30,7 +28,7 @@ export class Blackjack {
 
 	winnings = 100;
 
-	gameDeck = new DeckService();
+	gameDeck = new DeckService( false );
 
 	dealerCards = [];
 	playerCards = [];

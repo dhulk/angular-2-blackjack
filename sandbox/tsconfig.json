@@ -11,7 +11,9 @@
   "files": [
 	"public/src/app/app.module.ts",
     "public/src/app/blackjack.ts",
-	"public/src/app/cards/playingCard.component.ts"
+	"public/src/app/cards/deck.service.ts",
+	"public/src/app/cards/playingCard.component.ts",
+	"public/src/app/cards/suits.ts"
   ],
   "exclude": [
 	"node_modules",
